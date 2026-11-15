@@ -1,0 +1,141 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f5;
+    color: #292929;
+}
+
+/* Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 7%;
+    background: white;
+}
+
+header h2 {
+    color: #75533f;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    margin: 0 12px;
+    font-size: 14px;
+}
+
+button {
+    background: #75533f;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Hero section */
+.hero {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    padding: 60px 10%;
+    background: #eee7df;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.tagline {
+    color: #75533f;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero-content > p:not(.tagline) {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* Subjects */
+.subjects {
+    padding: 65px 8%;
+    text-align: center;
+}
+
+.subjects h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.subjects > p {
+    color: #777;
+    margin-bottom: 35px;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.subject-card {
+    background: white;
+    padding: 35px 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px #0000000a;
+    font-weight: bold;
+    border-bottom: 4px solid #b99a83;
+}
+
+/* Footer */
+footer {
+    background: #292929;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+/* Mobile screens */
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .subject-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
