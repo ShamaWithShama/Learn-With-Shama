@@ -4,78 +4,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn with Shama</title>
+    <title>Learn with Shama | Student Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h2>Learn with Shama</h2>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Subjects</a>
-            <a href="#">Assignments</a>
-            <a href="#">Ask Shama</a>
-        </nav>
-        <button class="login-btn" id="studentLoginBtn">Student Login</button>
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="brand">
+            <h2>Learn with Shama</h2>
+            <p>Your journey to academic excellence</p>
+        </div>
     </header>
 
-    <section class="hero">
+    <!-- REGISTRATION AND LOGIN -->
+    <section id="student-auth" class="auth-section">
+        <div class="auth-container">
+
+            <h2>Student Portal</h2>
+            <p>Join our learning community.</p>
+
+            <form id="register-form">
+                <h3>Create Your Account</h3>
+
+                <input type="text" id="student-name"
+                    placeholder="Full name" required>
+
+                <input type="email" id="register-email"
+                    placeholder="Email address" required>
+
+                <input type="password" id="register-password"
+                    placeholder="Create password" required>
+
+                <button type="submit">Create Account</button>
+            </form>
+
+            <p id="register-login-link">
+                Already have an account?
+                <button type="button" id="switchToLogin">
+                    Login here
+                </button>
+            </p>
+
+            <form id="login-form" style="display:none;">
+                <h3>Welcome Back!</h3>
+
+                <input type="email" id="login-email"
+                    placeholder="Email address" required>
+
+                <input type="password" id="login-password"
+                    placeholder="Password" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p id="login-register-link" style="display:none;">
+                New student?
+                <button type="button" id="switchToRegister">
+                    Register here
+                </button>
+            </p>
+
+        </div>
+    </section>
+
+    <!-- PUBLIC WELCOME PAGE -->
+    <section class="hero" id="welcome">
         <div class="hero-content">
             <p class="tagline">YOUR LEARNING JOURNEY STARTS HERE</p>
+
             <h1>Learn Better.<br>Achieve More.</h1>
+
             <p>
-                Access study notes, complete assignments,
-                practise questions and get help whenever
-                you need it.
+                Access quality study materials, practise questions,
+                complete assignments and develop your academic
+                potential with Learn with Shama.
             </p>
-            <button>Explore Learning</button>
         </div>
     </section>
 
-    <section class="subjects">
-        <h2>Explore Your Subjects</h2>
-        <p>Choose a subject and start learning.</p>
+    <!-- STUDENT DASHBOARD -->
+    <main id="student-dashboard" style="display:none;">
 
-        <div class="subject-grid">
-            <div class="subject-card">Biology</div>
-            <div class="subject-card">Chemistry</div>
-            <div class="subject-card">Mathematics</div>
-            <div class="subject-card">Physical Education</div>
+        <div class="dashboard-top">
+            <div>
+                <p class="tagline">STUDENT LEARNING CENTRE</p>
+                <h1 id="student-greeting">Welcome Back!</h1>
+                <p>Your learning journey continues here.</p>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
         </div>
-    </section>
 
+        <!-- QUICK OVERVIEW -->
+        <section class="dashboard-welcome">
+            <div>
+                <p>WELCOME TO YOUR LEARNING SPACE</p>
+                <h2>Learn. Practise. Improve. Succeed.</h2>
+                <p>Every lesson brings you one step closer to your goals.</p>
+            </div>
+            <div class="welcome-icon">📚</div>
+        </section>
+
+        <!-- SUBJECTS -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>My Subjects</h2>
+                    <p>Choose a subject and start learning.</p>
+                </div>
+            </div>
+
+            <div class="subject-grid">
+                <button class="subject-card" data-feature="Biology">
+                    <span>🧬</span>
+                    <h3>Biology</h3>
+                    <p>Explore life and living organisms.</p>
+                </button>
+
+                <button class="subject-card" data-feature="Chemistry">
+                    <span>⚗️</span>
+                    <h3>Chemistry</h3>
+                    <p>Discover the world of matter.</p>
+                </button>
+
+                <button class="subject-card" data-feature="Mathematics">
+                    <span>📐</span>
+                    <h3>Mathematics</h3>
+                    <p>Build your problem-solving skills.</p>
+                </button>
+
+                <button class="subject-card" data-feature="Physical Education">
+                    <span>🏃</span>
+                    <h3>Physical Education</h3>
+                    <p>Understand the science of movement.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEARNING CENTRE -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Learning Centre</h2>
+                    <p>Everything you need for effective learning.</p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+
+                <button class="feature-card" data-feature="Study Materials">
+                    <span>📖</span>
+                    <h3>Study Materials</h3>
+                    <p>Access notes and learning resources.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Assignments">
+                    <span>📝</span>
+                    <h3>Assignments</h3>
+                    <p>Complete and submit your schoolwork.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Ask Shama">
+                    <span>🤖</span>
+                    <h3>Ask Shama</h3>
+                    <p>Get help with challenging topics.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Quiz Arena">
+                    <span>🎯</span>
+                    <h3>Quiz Arena</h3>
+                    <p>Challenge yourself with quizzes.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Flashcards">
+                    <span>🃏</span>
+                    <h3>Flashcards</h3>
+                    <p>Revise important concepts quickly.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Virtual Laboratory">
+                    <span>🔬</span>
+                    <h3>Virtual Laboratory</h3>
+                    <p>Explore practical science activities.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Exam Practice">
+                    <span>📋</span>
+                    <h3>Exam Practice</h3>
+                    <p>Prepare for JCE and BGCSE examinations.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Question of the Day">
+                    <span>💡</span>
+                    <h3>Question of the Day</h3>
+                    <p>Test your knowledge every day.</p>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- PROGRESS AND ACHIEVEMENTS -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>My Progress</h2>
+                    <p>Keep track of your learning journey.</p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+
+                <button class="feature-card" data-feature="My Performance">
+                    <span>📊</span>
+                    <h3>My Performance</h3>
+                    <p>Monitor your academic progress.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Achievements">
+                    <span>🏆</span>
+                    <h3>Achievements</h3>
+                    <p>Celebrate your learning milestones.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Learning Streaks">
+                    <span>🔥</span>
+                    <h3>Learning Streaks</h3>
+                    <p>Build consistent study habits.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Points and Badges">
+                    <span>⭐</span>
+                    <h3>Points and Badges</h3>
+                    <p>Earn rewards through learning activities.</p>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- MORE FEATURES -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Explore More</h2>
+                    <p>Discover more ways to learn and grow.</p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+
+                <button class="feature-card" data-feature="Discussion Corner">
+                    <span>💬</span>
+                    <h3>Discussion Corner</h3>
+                    <p>Share ideas and discuss academic topics.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Announcements">
+                    <span>📢</span>
+                    <h3>Announcements</h3>
+                    <p>Stay updated with learning news.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Study Timer">
+                    <span>⏱️</span>
+                    <h3>Study Timer</h3>
+                    <p>Organise your study sessions.</p>
+                </button>
+
+                <button class="feature-card" data-feature="Career Corner">
+                    <span>💼</span>
+                    <h3>Career Corner</h3>
+                    <p>Explore careers and future opportunities.</p>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- DAILY CHALLENGE -->
+        <section class="daily-challenge">
+            <div>
+                <p>YOUR DAILY DOSE OF KNOWLEDGE</p>
+                <h2>🌟 Daily Challenge</h2>
+                <p>A little learning every day makes a big difference.</p>
+            </div>
+            <button data-feature="Daily Challenge">
+                Take the Challenge
+            </button>
+        </section>
+
+
+<!-- FEATURE DISPLAY -->
+<section id="feature-view" class="feature-view" style="display:none;">
+
+    <button id="backToDashboard" class="back-btn">
+        ← Back to Dashboard
+    </button>
+
+    <h2 id="feature-title">Learning Space</h2>
+    <p id="feature-description">
+        Welcome to your learning space.
+    </p>
+
+    <div id="subject-learning-area" style="display:none;">
+
+        <h3>Explore Topics</h3>
+
+        <div id="topic-list" class="topic-list"></div>
+
+        <div id="topic-content" class="topic-content">
+            <h3>Choose a topic to begin</h3>
+            <p>Your learning materials will appear here.</p>
+        </div>
+
+    </div>
+
+</section>
+
+    </main>
+
+    <!-- FOOTER -->
     <footer>
-        <p>© 2026 Learn with Shama. All rights reserved.</p>
+        <p>© 2027 Learn with Shama. All rights reserved.</p>
+        <p>Learn with purpose. Achieve with confidence.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="script.js"></script>
-<!-- STUDENT REGISTRATION AND LOGIN -->
-<section id="student-auth" class="auth-section">
-    <div class="auth-container">
-        <h2>Student Portal</h2>
-        <p>Welcome to Learn with Shama</p>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
 
-        <div class="auth-tabs">
-            <button onclick="showAuth('login')">Student Login</button>
-            <button onclick="showAuth('register')">Register</button>
-        </div>
-
-        <form id="login-form">
-            <h3>Student Login</h3>
-            <input type="email" id="login-email" placeholder="Email address" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-
-        <form id="register-form" style="display:none;">
-            <h3>Student Registration</h3>
-            <input type="text" id="student-name" placeholder="Full name" required>
-            <input type="email" id="register-email" placeholder="Email address" required>
-            <input type="password" id="register-password" placeholder="Create password" required>
-            <button type="submit">Create Account</button>
-        </form>
-    </div>
-</section>
 </body>
 </html>
