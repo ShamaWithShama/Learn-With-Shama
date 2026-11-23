@@ -328,7 +328,12 @@ async function checkSession() {
 supabaseClient.auth.onAuthStateChange(async (event, session) => {
 
     if (event === "SIGNED_OUT" || !session) {
-        document.getElementById("admin-panel").style.display = "none";
+        const adminPanel = document.getElementById("admin-panel");
+
+        if (adminPanel) {
+            adminPanel.style.display = "none";
+        }
+
         showLoginPage();
         return;
     }
