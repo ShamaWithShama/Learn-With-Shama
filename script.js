@@ -317,6 +317,7 @@ async function checkSession() {
     }
 
     if (data.session) {
+        await checkAdminAccess();
         showDashboard(data.session.user);
     } else {
         showLoginPage();
@@ -324,13 +325,16 @@ async function checkSession() {
 }
 
 // LISTEN FOR AUTHENTICATION CHANGES
-supabaseClient.auth.onAuthStateChange((event, session) => {
+supabaseClient.auth.onAuthStateChange(async (event, session) => {
 
     if (event === "SIGNED_OUT" || !session) {
+        document.getElementById("admin-panel").style.display = "none";
         showLoginPage();
+        return;
     }
 
     if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
+        await checkAdminAccess();
         showDashboard(session.user);
     }
 
@@ -340,3 +344,31 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
 checkSession();
 
 console.log("Learn with Shama student portal connected!");
+
+// ADMIN PANEL ACCESS
+async function checkAdminAccess() {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    const adminPanel = document.getElementById("admin-panel");
+
+    if (!adminPanel) return;
+
+    adminPanel.style.display = "none";
+
+    if (!user) return;
+
+    const { data, error } = await supabaseClient
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .single();
+
+    if (error) {
+        console.error("Admin access check:", error);
+        return;
+    }
+
+    if (data && data.role === "admin") {
+        adminPanel.style.display = "block";
+    }
+}
