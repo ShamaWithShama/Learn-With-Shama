@@ -377,6 +377,8 @@ if (data && data.role === "admin") {
     adminPanel.style.display = "block";
     await loadAdminTopics();
 }
+
+}
  
 // =====================================
 // LEARN WITH SHAMA - ADMIN TOPIC SYSTEM
