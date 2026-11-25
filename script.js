@@ -203,6 +203,7 @@ document.querySelectorAll("[data-feature]").forEach(button => {
     button.addEventListener("click", async function() {
 
         const feature = this.dataset.feature;
+        console.log("Selected subject:", feature);
 
         document.getElementById("student-dashboard")
             .querySelectorAll(".dashboard-section, .dashboard-welcome, .dashboard-top, .daily-challenge")
