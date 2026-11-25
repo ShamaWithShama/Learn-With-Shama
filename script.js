@@ -212,6 +212,10 @@ document.querySelectorAll("[data-feature]").forEach(button => {
             });
 
         document.getElementById("feature-view").style.display = "block";
+        document.getElementById("topic-list").innerHTML = "";
+document.getElementById("topic-content").innerHTML = "";
+document.getElementById("subject-learning-area").style.display = "block";
+document.getElementById("feature-description").textContent = "";
 
         document.getElementById("feature-title").textContent = feature;
 
