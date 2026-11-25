@@ -324,6 +324,53 @@
 
     </main>
 
+   <!-- ADMIN PANEL -->
+<section id="admin-panel" style="display:none;">
+
+    <h2>Learn with Shama — Admin Panel</h2>
+    <p>Manage your learning platform.</p>
+
+    <div class="admin-container">
+
+        <h3>Add a Learning Topic</h3>
+
+        <form id="add-topic-form">
+
+            <label for="topic-subject">Select Subject</label>
+            <select id="topic-subject" required>
+                <option value="">Choose Subject</option>
+                <option value="Biology">Biology</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physical Education">Physical Education</option>
+            </select>
+
+            <label for="topic-title">Topic Title</label>
+            <input type="text" id="topic-title"
+                placeholder="Enter topic title" required>
+
+            <label for="topic-content-input">Learning Content</label>
+            <textarea id="topic-content-input"
+                placeholder="Write your lesson content here..."
+                rows="8" required></textarea>
+
+            <label>
+                <input type="checkbox" id="topic-published">
+                Publish immediately
+            </label>
+
+            <button type="submit">Save Topic</button>
+
+        </form>
+
+        <div id="admin-message"></div>
+
+        <h3>Manage Existing Topics</h3>
+        <div id="admin-topic-list"></div>
+
+    </div>
+
+</section>
     <!-- FOOTER -->
     <footer>
         <p>© 2027 Learn with Shama. All rights reserved.</p>
