@@ -373,7 +373,144 @@ async function checkAdminAccess() {
         return;
     }
 
-    if (data && data.role === "admin") {
-        adminPanel.style.display = "block";
-    }
+if (data && data.role === "admin") {
+    adminPanel.style.display = "block";
+    await loadAdminTopics();
 }
+ 
+// =====================================
+// LEARN WITH SHAMA - ADMIN TOPIC SYSTEM
+// =====================================
+
+// SAVE NEW TOPICS
+const topicForm = document.getElementById("add-topic-form");
+
+if (topicForm) {
+
+    topicForm.addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+        const message = document.getElementById("admin-message");
+        const saveButton = topicForm.querySelector('button[type="submit"]');
+
+        const subject = document.getElementById("topic-subject").value;
+        const title = document.getElementById("topic-title").value.trim();
+        const content = document.getElementById("topic-content-input").value.trim();
+        const isPublished = document.getElementById("topic-published").checked;
+
+        if (!subject || !title || !content) {
+            message.textContent = "Please complete all fields.";
+            return;
+        }
+
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving...";
+
+        try {
+
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
+
+            if (userError || !user) {
+                throw new Error("Please log in again.");
+            }
+
+            const { error } = await supabaseClient
+                .from("topics")
+                .insert({
+                    subject: subject,
+                    title: title,
+                    content: content,
+                    is_published: isPublished,
+                    created_by: user.id
+                });
+
+            if (error) {
+                throw error;
+            }
+
+            message.textContent = "Topic saved successfully!";
+
+            topicForm.reset();
+
+            await loadAdminTopics();
+
+        } catch (error) {
+
+            console.error("Topic saving error:", error);
+
+            message.textContent = "Could not save topic: " + error.message;
+
+        } finally {
+
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Topic";
+
+        }
+
+    });
+
+}
+
+
+// LOAD EXISTING TOPICS
+async function loadAdminTopics() {
+
+    const topicList = document.getElementById("admin-topic-list");
+
+    if (!topicList) return;
+
+    topicList.textContent = "Loading topics...";
+
+    const { data, error } = await supabaseClient
+        .from("topics")
+        .select("id, subject, title, is_published, created_at")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+
+        console.error("Loading topics error:", error);
+
+        topicList.textContent = "Could not load topics: " + error.message;
+
+        return;
+    }
+
+    topicList.innerHTML = "";
+
+    if (!data || data.length === 0) {
+
+        topicList.textContent = "No topics have been saved yet.";
+
+        return;
+    }
+
+    data.forEach(topic => {
+
+        const item = document.createElement("div");
+
+        const heading = document.createElement("h4");
+        heading.textContent = topic.title;
+
+        const subject = document.createElement("p");
+        subject.textContent = "Subject: " + topic.subject;
+
+        const status = document.createElement("p");
+        status.textContent = topic.is_published
+            ? "Status: Published"
+            : "Status: Unpublished";
+
+        item.appendChild(heading);
+        item.appendChild(subject);
+        item.appendChild(status);
+
+        topicList.appendChild(item);
+
+    });
+
+}
+
+    // START CHECKING LOGIN SESSION
+checkSession();
+
