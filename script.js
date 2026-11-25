@@ -196,10 +196,11 @@ const subjectTopics = {
     ]
 };
 
-// DASHBOARD FEATURE NAVIGATION
+
+ // DASHBOARD FEATURE NAVIGATION
 document.querySelectorAll("[data-feature]").forEach(button => {
 
-    button.addEventListener("click", function() {
+    button.addEventListener("click", async function() {
 
         const feature = this.dataset.feature;
 
@@ -224,13 +225,41 @@ document.querySelectorAll("[data-feature]").forEach(button => {
                 `Welcome to ${feature}. Choose a topic below to begin learning.`;
 
             learningArea.style.display = "block";
-            topicList.innerHTML = "";
+            topicList.innerHTML = "Loading published topics...";
+
             topicContent.innerHTML = `
                 <h3>Choose a topic to begin</h3>
                 <p>Your learning content will appear here.</p>
             `;
 
-            subjectTopics[feature].forEach(topic => {
+            const { data, error } = await supabaseClient
+                .from("topics")
+                .select("title, content")
+                .eq("subject", feature)
+                .eq("is_published", true)
+                .order("created_at", { ascending: false });
+
+            if (error) {
+
+                console.error("Loading student topics:", error);
+
+                topicList.textContent =
+                    "Could not load topics. Please try again.";
+
+                return;
+            }
+
+            topicList.innerHTML = "";
+
+            if (!data || data.length === 0) {
+
+                topicList.textContent =
+                    "No published topics are available yet.";
+
+                return;
+            }
+
+            data.forEach(topic => {
 
                 const topicButton = document.createElement("button");
 
@@ -249,6 +278,7 @@ document.querySelectorAll("[data-feature]").forEach(button => {
 
                     topicContent.appendChild(heading);
                     topicContent.appendChild(paragraph);
+
                 });
 
                 topicList.appendChild(topicButton);
