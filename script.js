@@ -218,11 +218,9 @@ if (adminPanel) {
 } else {
     console.log("ADMIN PANEL NOT FOUND");
 }
-}
-}
 
-        document.getElementById("feature-view").style.display = "block";
-        document.getElementById("topic-list").innerHTML = "";
+document.getElementById("feature-view").style.display = "block";
+document.getElementById("topic-list").innerHTML = "";
 document.getElementById("topic-content").innerHTML = "";
 document.getElementById("subject-learning-area").style.display = "block";
 document.getElementById("feature-description").textContent = "";
