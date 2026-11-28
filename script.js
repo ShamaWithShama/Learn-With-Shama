@@ -300,22 +300,62 @@ console.log("Topics returned:", data);
 
             });
 
-        } else {
+} else if (feature === "Assignments") {
 
-            learningArea.style.display = "none";
+    learningArea.style.display = "block";
+    description.textContent = "View and complete your assignments.";
+    topicList.textContent = "Loading assignments...";
 
-            description.textContent =
-                `Welcome to ${feature}. We will develop this learning space next.`;
-        }
+    const { data, error } = await supabaseClient
+        .from("assignments")
+        .select("id, subject, title, instructions, deadline")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false });
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    if (error) {
+        console.error("Loading assignments:", error);
+        topicList.textContent = "Could not load assignments.";
+        return;
+    }
 
+    topicList.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        topicList.textContent = "No published assignments available.";
+        return;
+    }
+
+    data.forEach(assignment => {
+        const item = document.createElement("div");
+
+        const heading = document.createElement("h3");
+        heading.textContent = assignment.title;
+
+        const subject = document.createElement("p");
+        subject.textContent = "Subject: " + assignment.subject;
+
+        const instructions = document.createElement("p");
+        instructions.textContent = assignment.instructions;
+
+        const deadline = document.createElement("p");
+        deadline.textContent =
+            "Deadline: " + new Date(assignment.deadline).toLocaleString();
+
+        item.appendChild(heading);
+        item.appendChild(subject);
+        item.appendChild(instructions);
+        item.appendChild(deadline);
+
+        topicList.appendChild(item);
     });
 
-});
+} else {
+
+    learningArea.style.display = "none";
+
+    description.textContent =
+        `Welcome to ${feature}. We will develop this learning space next.`;
+}
 
 
 // BACK TO DASHBOARD
