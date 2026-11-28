@@ -413,6 +413,7 @@ async function checkAdminAccess() {
 if (data && data.role === "admin") {
     adminPanel.style.display = "block";
     await loadAdminTopics();
+    await loadAdminAssignments();
 }
 
 }
@@ -491,6 +492,72 @@ if (topicForm) {
     });
 
 }
+// =====================================
+// SAVE NEW ASSIGNMENTS
+// =====================================
+
+const assignmentForm = document.getElementById("save-assignment");
+
+if (assignmentForm) {
+
+    assignmentForm.addEventListener("click", async function(e) {
+
+        e.preventDefault();
+
+        const saveButton = assignmentForm;
+        const subject = document.getElementById("assignment-subject").value;
+        const title = document.getElementById("assignment-title").value.trim();
+        const instructions = document.getElementById("assignment-instructions").value.trim();
+        const deadline = document.getElementById("assignment-deadline").value;
+        const isPublished = document.getElementById("assignment-published").checked;
+
+        if (!subject || !title || !instructions || !deadline) {
+            alert("Please complete all assignment fields.");
+            return;
+        }
+
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving...";
+
+        try {
+
+            const { error } = await supabaseClient
+                .from("assignments")
+                .insert({
+                    subject: subject,
+                    title: title,
+                    instructions: instructions,
+                    deadline: deadline,
+                    is_published: isPublished
+                });
+
+            if (error) throw error;
+
+            alert("Assignment saved successfully!");
+
+            document.getElementById("assignment-subject").value = "";
+            document.getElementById("assignment-title").value = "";
+            document.getElementById("assignment-instructions").value = "";
+            document.getElementById("assignment-deadline").value = "";
+            document.getElementById("assignment-published").checked = false;
+
+            await loadAdminAssignments();
+
+        } catch (error) {
+
+            console.error("Assignment saving error:", error);
+            alert("Could not save assignment: " + error.message);
+
+        } finally {
+
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Assignment";
+
+        }
+
+    });
+
+}
 
 
 // LOAD EXISTING TOPICS
@@ -545,6 +612,65 @@ async function loadAdminTopics() {
         item.appendChild(status);
 
         topicList.appendChild(item);
+
+    });
+
+}
+// =====================================
+// LOAD EXISTING ASSIGNMENTS
+// =====================================
+
+async function loadAdminAssignments() {
+
+    const assignmentList = document.getElementById("admin-assignment-list");
+
+    if (!assignmentList) return;
+
+    assignmentList.textContent = "Loading assignments...";
+
+    const { data, error } = await supabaseClient
+        .from("assignments")
+        .select("id, subject, title, deadline, is_published, created_at")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Loading assignments error:", error);
+        assignmentList.textContent = "Could not load assignments: " + error.message;
+        return;
+    }
+
+    assignmentList.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        assignmentList.textContent = "No assignments have been saved yet.";
+        return;
+    }
+
+    data.forEach(assignment => {
+
+        const item = document.createElement("div");
+
+        const heading = document.createElement("h4");
+        heading.textContent = assignment.title;
+
+        const subject = document.createElement("p");
+        subject.textContent = "Subject: " + assignment.subject;
+
+        const deadline = document.createElement("p");
+        deadline.textContent =
+            "Deadline: " + new Date(assignment.deadline).toLocaleString();
+
+        const status = document.createElement("p");
+        status.textContent = assignment.is_published
+            ? "Status: Published"
+            : "Status: Unpublished";
+
+        item.appendChild(heading);
+        item.appendChild(subject);
+        item.appendChild(deadline);
+        item.appendChild(status);
+
+        assignmentList.appendChild(item);
 
     });
 
