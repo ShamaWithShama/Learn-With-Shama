@@ -357,6 +357,12 @@ console.log("Topics returned:", data);
         `Welcome to ${feature}. We will develop this learning space next.`;
 }
 
+    });
+
+});
+
+// BACK TO DASHBOARD
+
 
 // BACK TO DASHBOARD
 document.getElementById("backToDashboard").addEventListener("click", async function() {
