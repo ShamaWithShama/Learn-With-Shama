@@ -210,6 +210,11 @@ document.querySelectorAll("[data-feature]").forEach(button => {
             .forEach(section => {
                 section.style.display = "none";
             });
+        const adminPanel = document.getElementById("admin-panel");
+
+if (adminPanel) {
+    adminPanel.style.display = "none";
+}
 
         document.getElementById("feature-view").style.display = "block";
         document.getElementById("topic-list").innerHTML = "";
