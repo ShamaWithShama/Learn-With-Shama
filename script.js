@@ -243,6 +243,8 @@ document.getElementById("feature-description").textContent = "";
                 .eq("subject", feature)
                 .eq("is_published", true)
                 .order("created_at", { ascending: false });
+            console.log("Selected feature:", feature);
+console.log("Topics returned:", data);
 
             if (error) {
 
