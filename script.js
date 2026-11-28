@@ -214,6 +214,7 @@ document.querySelectorAll("[data-feature]").forEach(button => {
 
 if (adminPanel) {
     adminPanel.style.display = "none";
+    console.log("Admin panel hidden:", adminPanel.style.display);
 }
 
         document.getElementById("feature-view").style.display = "block";
