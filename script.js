@@ -210,8 +210,6 @@ document.querySelectorAll("[data-feature]").forEach(button => {
             .forEach(section => {
                 section.style.display = "none";
             });
-        const adminPanel = document.getElementById("admin-panel");
-
 const adminPanel = document.getElementById("admin-panel");
 
 if (adminPanel) {
@@ -219,6 +217,7 @@ if (adminPanel) {
     console.log("ADMIN PANEL FOUND AND HIDDEN");
 } else {
     console.log("ADMIN PANEL NOT FOUND");
+}
 }
 }
 
