@@ -369,6 +369,43 @@
         <div id="admin-topic-list"></div>
 
     </div>
+    <hr>
+
+<h3>Manage Assignments</h3>
+
+<div class="admin-form">
+
+    <label>Subject</label>
+    <select id="assignment-subject">
+        <option value="">Choose Subject</option>
+        <option value="Biology">Biology</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Physical Education">Physical Education</option>
+    </select>
+
+    <label>Assignment Title</label>
+    <input type="text" id="assignment-title"
+        placeholder="Enter assignment title">
+
+    <label>Instructions</label>
+    <textarea id="assignment-instructions"
+        placeholder="Enter assignment instructions"></textarea>
+
+    <label>Deadline</label>
+    <input type="datetime-local" id="assignment-deadline">
+
+    <label>
+        <input type="checkbox" id="assignment-published">
+        Publish immediately
+    </label>
+
+    <button id="save-assignment">Save Assignment</button>
+
+</div>
+
+<h3>Existing Assignments</h3>
+<div id="admin-assignment-list"></div>
 
 </section>
     <!-- FOOTER -->
