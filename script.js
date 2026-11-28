@@ -212,9 +212,14 @@ document.querySelectorAll("[data-feature]").forEach(button => {
             });
         const adminPanel = document.getElementById("admin-panel");
 
+const adminPanel = document.getElementById("admin-panel");
+
 if (adminPanel) {
     adminPanel.style.display = "none";
-    console.log("Admin panel hidden:", adminPanel.style.display);
+    console.log("ADMIN PANEL FOUND AND HIDDEN");
+} else {
+    console.log("ADMIN PANEL NOT FOUND");
+}
 }
 
         document.getElementById("feature-view").style.display = "block";
