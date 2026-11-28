@@ -317,8 +317,9 @@ console.log("Topics returned:", data);
 
 });
 
+
 // BACK TO DASHBOARD
-document.getElementById("backToDashboard").addEventListener("click", function() {
+document.getElementById("backToDashboard").addEventListener("click", async function() {
 
     document.getElementById("feature-view").style.display = "none";
 
@@ -327,6 +328,9 @@ document.getElementById("backToDashboard").addEventListener("click", function() 
     ).forEach(section => {
         section.style.display = "";
     });
+
+    // RESTORE ADMIN PANEL ACCESS
+    await checkAdminAccess();
 
     window.scrollTo({
         top: 0,
